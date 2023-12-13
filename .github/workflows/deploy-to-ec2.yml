@@ -75,7 +75,7 @@ jobs:
       - name: Test Website Functionality
         run: |
           sleep 10
-          response=$(curl -s http://localhost)
+          response=$(curl -s http://18.234.242.38/)
           if [[ "$response" == *"Website functionality successfully working"* ]]; then
             echo "Website functionality test passed!"
           else
