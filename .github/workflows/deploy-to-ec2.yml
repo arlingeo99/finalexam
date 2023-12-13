@@ -77,7 +77,7 @@ jobs:
           response_code=$(curl -s -o /dev/null -w "%{http_code}" http://${{ secrets.HOST_DNS }}/)
           if [ "$response_code" -eq "200" ]; then
             echo "Site is accessible. Test passed!"
-           else
+          else
             echo "Site is not accessible. Test failed."
             exit 1
         fi
