@@ -26,7 +26,6 @@ jobs:
           docker buildx inspect --bootstrap
           docker buildx build --load -t my-doc-app:latest .
           docker tag my-doc-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/3504finalexam:latest
-          echo $(docker images)
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/3504finalexam:latest
 
       - name: Check Docker Image Build
@@ -72,3 +71,14 @@ jobs:
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/3504finalexam:latest
             docker run -d -p 80:80 --name my-doc-app ${{ secrets.DOCKERHUB_USERNAME }}/3504finalexam:latest
             docker image prune -f
+
+      - name: Test Website Functionality
+        run: |
+          sleep 10
+          response=$(curl -s http://localhost)
+          if [[ "$response" == *"Website functionality successfully working"* ]]; then
+            echo "Website functionality test passed!"
+          else
+            echo "Website functionality test failed!"
+            exit 1
+          fi
