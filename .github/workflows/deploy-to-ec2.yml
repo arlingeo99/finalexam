@@ -80,4 +80,4 @@ jobs:
           else
             echo "Site is not accessible. Test failed."
             exit 1
-        fi
+          fi
