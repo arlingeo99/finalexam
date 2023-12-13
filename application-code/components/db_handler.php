@@ -7,7 +7,7 @@ $database = "techco";
 
 
 function validateFormData($data)
-{
+{ 
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
