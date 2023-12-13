@@ -72,10 +72,12 @@ jobs:
             docker run -d -p 80:80 --name my-doc-app ${{ secrets.DOCKERHUB_USERNAME }}/3504finalexam:latest
             docker image prune -f
 
-      response_code=$(curl -s -o /dev/null -w "%{http_code}" http://${{ secrets.HOST_DNS }}/)
-        if [ "$response_code" -eq "200" ]; then
-          echo "Site is accessible. Test passed!"
-        else
-          echo "Site is not accessible. Test failed."
-          exit 1
+      - name: Test Website Functionality
+        run: |
+          response_code=$(curl -s -o /dev/null -w "%{http_code}" http://${{ secrets.HOST_DNS }}/)
+          if [ "$response_code" -eq "200" ]; then
+            echo "Site is accessible. Test passed!"
+           else
+            echo "Site is not accessible. Test failed."
+            exit 1
         fi
